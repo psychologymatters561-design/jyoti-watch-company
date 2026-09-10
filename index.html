@@ -1,718 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+  /* GPU Acceleration */
+  transform: translate3d(0, 0, 0);
+  will-change: scroll-position;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+
+/* Performance Optimization */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth Scrolling */
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Scroll Performance */
+body {
+  will-change: auto;
+}
+
+/* Animation GPU Optimization */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+</style>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jyoti Watch Company - Luxury Timepieces</title>
-  <style>
-    @font-face {
-      font-family: "Optimistic";
-      font-style: normal;
-      font-weight: 400 600;
-      font-display: swap;
-      src: url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      will-change: scroll-position;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-      color: #ffffff;
-      line-height: 1.6;
-    }
-
-    /* ===== PERFORMANCE KEYFRAMES ===== */
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.95) translateZ(0);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateZ(0);
-      }
-    }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px) translateZ(0);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) translateZ(0);
-      }
-    }
-
-    @keyframes floatSmooth {
-      0%, 100% {
-        transform: translateY(0px) translateZ(0);
-      }
-      50% {
-        transform: translateY(-30px) translateZ(0);
-      }
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        opacity: 0.5;
-        box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        transform: scale(1) translateZ(0);
-      }
-      50% {
-        opacity: 0.9;
-        box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
-        transform: scale(1.05) translateZ(0);
-      }
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: -1000px 0;
-      }
-      100% {
-        background-position: 1000px 0;
-      }
-    }
-
-    /* ===== GPU ACCELERATION ===== */
-    * {
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      perspective: 1000px;
-    }
-
-    /* ===== ACCESSIBILITY ===== */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
-    /* ===== HEADER STYLES ===== */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 20px 40px;
-      background: rgba(10, 10, 10, 0.95);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 100;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-      will-change: transform;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 700;
-      color: #d4af37;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: color;
-    }
-
-    .logo:hover {
-      color: #ffd700;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-    }
-
-    nav {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      will-change: color;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #d4af37, #ffd700);
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: width;
-    }
-
-    nav a:hover {
-      color: #d4af37;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* ===== HERO SECTION ===== */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 80px;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(26, 26, 46, 0.8) 100%);
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
-      animation: glowPulse 8s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    .hero-content {
-      text-align: center;
-      z-index: 10;
-      animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
-      will-change: opacity, transform;
-    }
-
-    .hero h1 {
-      font-size: 72px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #ffffff;
-      letter-spacing: 4px;
-      text-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
-      animation: fadeInScale 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .hero p {
-      font-size: 20px;
-      color: #d4af37;
-      margin-bottom: 40px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      animation: fadeInScale 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 16px 60px;
-      background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
-      color: #0a0a0a;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      border-radius: 50px;
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform, box-shadow;
-      animation: fadeInScale 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-4px) translateZ(0);
-      box-shadow: 0 20px 50px rgba(212, 175, 55, 0.6);
-    }
-
-    .cta-button:active {
-      transform: translateY(-1px) translateZ(0);
-    }
-
-    /* ===== SECTIONS ===== */
-    section {
-      padding: 100px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-title {
-      font-size: 48px;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 60px;
-      color: #ffffff;
-      letter-spacing: 2px;
-      position: relative;
-      padding-bottom: 30px;
-      animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #d4af37, transparent);
-      will-change: width;
-    }
-
-    /* ===== PRODUCT GRID ===== */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
-      margin-top: 40px;
-    }
-
-    .product-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 15px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform, border-color, box-shadow;
-      animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-      animation-fill-mode: both;
-    }
-
-    .product-card:nth-child(1) { animation-delay: 0.1s; }
-    .product-card:nth-child(2) { animation-delay: 0.2s; }
-    .product-card:nth-child(3) { animation-delay: 0.3s; }
-    .product-card:nth-child(4) { animation-delay: 0.4s; }
-
-    .product-card:hover {
-      transform: translateY(-15px) translateZ(0);
-      border-color: rgba(212, 175, 55, 0.8);
-      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
-    }
-
-    .product-image {
-      width: 100%;
-      height: 280px;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 80px;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform;
-    }
-
-    .product-card:hover .product-image {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
-      transform: scale(1.1) translateZ(0);
-    }
-
-    .product-info {
-      padding: 30px 25px;
-    }
-
-    .product-info h3 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      color: #d4af37;
-      letter-spacing: 1px;
-      transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .product-card:hover .product-info h3 {
-      color: #ffd700;
-    }
-
-    .product-info p {
-      font-size: 14px;
-      color: #b0b0b0;
-      line-height: 1.8;
-    }
-
-    /* ===== FEATURES SECTION ===== */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-top: 50px;
-    }
-
-    .feature-item {
-      text-align: center;
-      padding: 40px 30px;
-      border-radius: 15px;
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform, background, box-shadow;
-      animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-      animation-fill-mode: both;
-    }
-
-    .feature-item:nth-child(1) { animation-delay: 0.1s; }
-    .feature-item:nth-child(2) { animation-delay: 0.2s; }
-    .feature-item:nth-child(3) { animation-delay: 0.3s; }
-    .feature-item:nth-child(4) { animation-delay: 0.4s; }
-
-    .feature-item:hover {
-      background: rgba(212, 175, 55, 0.15);
-      transform: translateY(-10px) translateZ(0);
-      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
-      border-color: rgba(212, 175, 55, 0.4);
-    }
-
-    .feature-icon {
-      font-size: 60px;
-      margin-bottom: 20px;
-      display: inline-block;
-      animation: floatSmooth 4s ease-in-out infinite;
-      will-change: transform;
-    }
-
-    .feature-item h4 {
-      font-size: 20px;
-      margin-bottom: 15px;
-      color: #d4af37;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-
-    .feature-item p {
-      font-size: 14px;
-      color: #b0b0b0;
-      line-height: 1.8;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: rgba(10, 10, 10, 0.95);
-      border-top: 1px solid rgba(212, 175, 55, 0.2);
-      padding: 60px 40px 20px;
-      text-align: center;
-      color: #808080;
-      margin-top: 50px;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto 40px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      text-align: left;
-    }
-
-    .footer-section h5 {
-      color: #d4af37;
-      margin-bottom: 20px;
-      font-size: 16px;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-
-    .footer-section ul {
-      list-style: none;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-
-    .footer-section a {
-      color: #b0b0b0;
-      text-decoration: none;
-      transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: color;
-    }
-
-    .footer-section a:hover {
-      color: #d4af37;
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(212, 175, 55, 0.15);
-      padding-top: 20px;
-      font-size: 13px;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      header {
-        padding: 15px 20px;
-      }
-
-      .header-content {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      nav {
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-        letter-spacing: 2px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .section-title {
-        font-size: 36px;
-        margin-bottom: 40px;
-      }
-
-      section {
-        padding: 60px 20px;
-      }
-
-      .product-grid {
-        gap: 25px;
-      }
-
-      .cta-button {
-        padding: 14px 40px;
-        font-size: 14px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 14px;
-        margin-bottom: 25px;
-      }
-
-      .section-title {
-        font-size: 24px;
-      }
-
-      nav {
-        gap: 15px;
-      }
-
-      nav a {
-        font-size: 12px;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>React Artifact</title>
+  <style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: [...]
+</style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="header-content">
-      <div class="logo">⌚ JYOTI</div>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#collection">Collection</a>
-        <a href="#features">Features</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- HERO SECTION -->
-  <section class="hero" id="home">
-    <div class="hero-content">
-      <h1>JYOTI WATCH COMPANY</h1>
-      <p>Timeless Elegance Meets Modern Precision</p>
-      <button class="cta-button" onclick="document.getElementById('collection').scrollIntoView({behavior: 'smooth'})">
-        Explore Collection
-      </button>
-    </div>
-  </section>
-
-  <!-- COLLECTION SECTION -->
-  <section id="collection">
-    <h2 class="section-title">Our Exclusive Collection</h2>
-    <div class="product-grid">
-      <div class="product-card">
-        <div class="product-image">⌚</div>
-        <div class="product-info">
-          <h3>Heritage Series</h3>
-          <p>Classic timepieces with timeless design and Swiss precision engineering crafted for discerning collectors.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-image">✨</div>
-        <div class="product-info">
-          <h3>Luxury Elite</h3>
-          <p>Premium collection featuring diamond-encrusted cases and premium sapphire crystals for the most demanding.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-image">🌟</div>
-        <div class="product-info">
-          <h3>Modern Minimalist</h3>
-          <p>Contemporary designs with clean lines and innovative material combinations for the modern aesthetic.</p>
-        </div>
-      </div>
-      <div class="product-card">
-        <div class="product-image">🏆</div>
-        <div class="product-info">
-          <h3>Sports Performance</h3>
-          <p>High-performance watches designed for adventure and precision timing in extreme conditions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES SECTION -->
-  <section id="features">
-    <h2 class="section-title">Why Choose JYOTI</h2>
-    <div class="features">
-      <div class="feature-item">
-        <div class="feature-icon">🎯</div>
-        <h4>Precision Crafted</h4>
-        <p>Each timepiece is meticulously crafted with uncompromising attention to every detail and specification.</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">💎</div>
-        <h4>Premium Materials</h4>
-        <p>We exclusively use the finest materials including gold, platinum, and rare exotic metals and gems.</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">⏰</div>
-        <h4>Lifetime Warranty</h4>
-        <p>Every JYOTI watch comes with a comprehensive lifetime warranty covering all manufacturing defects.</p>
-      </div>
-      <div class="feature-item">
-        <div class="feature-icon">🌍</div>
-        <h4>Global Heritage</h4>
-        <p>Over 50 years of watchmaking excellence and innovation recognized worldwide by connoisseurs.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact">
-    <h2 class="section-title">Get In Touch</h2>
-    <div style="text-align: center; padding: 50px; background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px; max-width: 600px; margin: 0 auto;">
-      <p style="font-size: 18px; color: #d4af37; margin-bottom: 30px; letter-spacing: 1px;">Ready to find your perfect timepiece?</p>
-      <button class="cta-button">Contact Us Today</button>
-      <p style="margin-top: 30px; color: #b0b0b0; font-size: 14px;">📧 info@jyotiwatch.com | 📱 +1 (555) 123-4567</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h5>About JYOTI</h5>
-        <p>Crafting luxury timepieces since 1975, JYOTI represents the pinnacle of watchmaking excellence and tradition.</p>
-      </div>
-      <div class="footer-section">
-        <h5>Quick Links</h5>
-        <ul>
-          <li><a href="#collection">Shop Collection</a></li>
-          <li><a href="#features">Our Story</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#home">Home</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h5>Connect</h5>
-        <ul>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">LinkedIn</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2024 JYOTI Watch Company. All rights reserved. | Privacy Policy | Terms of Service</p>
-    </div>
-  </footer>
-
-  <script>
-    // Performance: requestAnimationFrame for smooth animations
+  <div id="root"></div>
+  
+  <script type="module">
+    /* GPU Acceleration for Smooth Animations */
+    document.documentElement.style.transform = 'translate3d(0, 0, 0)';
+    document.body.style.transform = 'translate3d(0, 0, 0)';
+    
+    /* RequestAnimationFrame for 60fps scroll */
     let ticking = false;
-
     window.addEventListener('scroll', () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          // Smooth scroll animations
           ticking = false;
         });
         ticking = true;
       }
     }, { passive: true });
 
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animation = 'slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
-        }
-      });
-    }, observerOptions);
-
-    // Observe sections
-    document.querySelectorAll('section, .product-card, .feature-item').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, { passive: true });
-    });
-
-    // Enable hardware acceleration
-    document.documentElement.style.transform = 'translate3d(0, 0, 0)';
+    /* Optimize animations with will-change */
+    const style = document.createElement('style');
+    style.textContent = `
+      [data-animate] {
+        will-change: transform, opacity;
+        transform: translate3d(0, 0, 0);
+      }
+    `;
+    document.head.appendChild(style);
   </script>
+
+  <script type="module">var BQ=Object.create;var{getPrototypeOf:gQ,defineProperty:wp,getOwnPropertyNames:lQ}=Object;var NQ=Object.prototype.hasOwnProperty;var eA=(A,U,K)=>{K=A!=null?BQ(gQ(A)):{};for(var I in A)NQ.call(A,I)&&(K[I]=A[I]);return K};var wA=(A,U,K)=>{U in A?wp(A,U,{enumerable:!0,configurable:!0,writable:!0,value:K}):A[U]=K};var vA=(A,U)=>{for(var K in U)wp(A,K,{get:U[K],enumerable:!0})};var yA=()=>{};var pA=A=>A;var mA=(A,U)=>(K)=>{var I=!1;return(...o)=>{if(!I)I=!0,A.apply(void 0,o);else return U.apply(void 0,o)}};var CA=(A,U)=>()=>(U-=1,U<=0?A():setTimeout(CA(A,U),0));var xA=(A)=>{var U=typeof A;return U==="function"||U==="object"&&A!==null};var SA=(A,U)=>A===U;var EA=(A)=>{var U=!0;return(K)=>{if(U){U=!1;var I=A();if(I!=null)return I.apply(void 0,K)}return K}};var TA=(A)=>{var U=[],K=()=>U.forEach(A);return[K,()=>U.length=0,(...I)=>U.push(...I)]};var OA=(A)=>{var U=[],K=(I)=>{var o=U.findIndex((F)=>SA(F[0],I));return o>=0?(U.splice(o,1),U.unshift([I,A(I)]),U[0][1]):(U.unshift([I,A(I)]),U.length>10&&U.pop(),U[0][1])};return K};var AA=(A,U)=>A.size-U.size;var RA=(A,U)=>{var K=new Map(A);return new Map((U||[]).map((I)=>[I,K.get(I)]))};var PA=(A)=>{var U=new Map;for(var K of A)if(!U.has(K))U.set(K,U.size);return U};var NA=(A)=>{var U=0,K=0,I;return()=>{var o=Date.now();if(I===void 0)I=o;var F=o-I;return U=K,K=Math.floor(F),U}};var uA=(A)=>{return A==null?[]:Array.isArray(A)?A:[A]};var kA=(A)=>{if(!xA(A))throw new Error(`Expected an object, but received: ${typeof A}`);return A};var _A=(A,U)=>{if(!Array.isArray(A))throw new Error(`Expected an array, but received: ${typeof A}`);if(typeof U!="number")throw new Error(`Expected a number, but received: ${typeof U}`);if(U<0||U>=A.length)throw new Error(`Index out of bounds: ${U}}`);};var jA=(A,U)=>{var K=A.length;if(K===0)return[];if(K===1)return[A];var I=Math.floor(K/2);return U(jA(A.slice(0,I),U),jA(A.slice(I),U))};var DA=(A,U)=>jA(A,(K,I)=>K.concat(I));var BA=(A)=>{var U=[];for(var K of A)Array.isArray(K)?U.push(...K):U.push(K);return U};var LA=(A)=>{var U=[],K=new Set;for(var I of A)K.has(I)||(K.add(I),U.push(I));return U};var IA=(A,U)=>{var K=new Map;return A.forEach((I)=>{var o=U(I);K.has(o)?K.get(o).push(I):K.set(o,[I])}),K};var ZA=(A,U)=>A.filter((K,I)=>U(K,I));var MA=(A,U)=>A.map(U);var FA=(A,U,K)=>A.reduce(K,U);var qA=(A,U)=>A.some(U);var WA=(A,U)=>A.every(U);var VA=(A)=>new Promise(U=>{setTimeout(U,A)});var GA=(A)=>{var U=Date.now();return()=>Date.now()-U};var HA=(A)=>Math.floor(Math.random()*A);var UA=(A,U)=>{var K=A.toString();return U==null?K:K.replace(/\B(?=(\d{3})+(?!\d))/g,U)};var KA=Object.freeze({slice:(...A)=>Array.prototype.slice.apply(void 0,A),entries:Object.entries,keys:Object.keys,values:Object.values});var zA=(A)=>{var U={};return Object.keys(A).sort().forEach((K)=>{U[K]=A[K]}),U};var $A=(A)=>{var U={};return Object.entries(A).forEach(([K,I])=>{I!=null&&(U[K]=I)}),U};var JA=(A)=>{if(typeof A!="object"||A===null)return A;if(A instanceof Date)return new Date(A.getTime());if(A instanceof Array){var U=[];return A.forEach((K,I)=>{U[I]=JA(K)}),U}if(A instanceof Object){var U={};return Object.entries(A).forEach(([K,I])=>{U[K]=JA(I)}),U}};var YA=(A,U)=>{var K=0,I=0;return()=>{var o=Date.now(),F=o-K;if(K=o,I+=F,I>=U)return I=0,!0;return!1}};var QA=(A,U)=>typeof A==typeof U&&A===U;var XA=(A,U)=>{if(A===U)return 0;var K=A.toString(),I=U.toString();return K<I?-1:K>I?1:0};var eF=(A,U)=>qA(A,(K)=>XA(K,U)===0);var tF=(A,U)=>{var K=A.lastIndexOf(U);return K===-1?[A]:K===A.length-1?[A.slice(0,K)]:K===0?["",A.slice(1)]:[A.slice(0,K),A.slice(K+1)]};var nF=(A,U,K)=>{if(K===void 0&&(K=A.length),A===U)return!0;if(A.length!==U.length)return!1;for(var I=0;I<K;I++)if(!QA(A[I],U[I]))return!1;return!0};var rF=(A,U)=>{for(var K of A)if(U(K))return K};var oF=(A,U)=>{for(var K=A.length-1;K>=0;K--)if(U(A[K]))return A[K]};var iF=(A)=>A[A.length-1];var sF=(A,U)=>{if(U.length===0)throw new Error("Cannot find index of an empty array");return A.indexOf(U[0])};var FF=(A)=>{return A==null?`
+`).replace(fg,"")}function Oo(A,U,K){if(U=Ui(U),Ui(A)!==U&&K)throw Error(C(425))}function ap(){}function fF(A,U){return A==="textarea"||A==="noscript"||typeof U.children==="string"||typeof U.children==="number"||typeof U.dangerouslySetInnerHTML==="object"&&U.dangerouslySetInnerHTML!==null&&"__html"in U.dangerouslySetInnerHTML}var hF=null,dF=null;function gF(A){if(A=wp(A),A.type==="string")return A;var U=A.type,K=A.props,I={};if("defaultProps"in U)var o=U.defaultProps;return Object.keys(K).forEach(F=>{if(K[F]==="defaultProps"&&o){I[F]=o[F]}}),I}var bF={key:!0,ref:!0,props:!0,proto:!0,__self:!0,__source:!0};function vF(A,U,K){this.constructor=A}function yF(A){this.props=A}var mF=(A,U,K)=>{A.displayName=`Error generating stack: `+F.message+`
+`+F.stack}return{value:A,source:U,stack:p,digest:null}}function qF(A,U,K){return{value:A,source:null,stack:K!=null?K:null,digest:U!=null?U:null}}function pa(A,U){try{console.error(U.value)}catch(K){setTimeout(()=>{throw K},0)}}</script>
 </body>
 </html>
